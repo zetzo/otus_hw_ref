@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+  db:
+    image: mongo:${MNGOVER}
+    volumes:
+      - db:/data/db
+
+  ui:
+    build: ../src/ui
+    image: ${USERNAME}/ui:${UIVER}
+    ports:
+      - ${PORT}/tcp
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.ui
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+
+  post:
+    build: ../src/post-py
+    image: ${USERNAME}/post:${PSTVER}
+    links:
+      - "db:post_db"
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.post
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+
+  comment:
+    build: ../src/comment
+    image: ${USERNAME}/comment:${CMNTVER}
+    links:
+      - "db:comment_db"
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+
+volumes:
+  db:
