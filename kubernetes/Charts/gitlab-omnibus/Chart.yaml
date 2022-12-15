@@ -1,13 +1,26 @@
-appVersion: 3.6.3
-description: NoSQL document-oriented database that stores JSON-like documents with
-  dynamic schemas, simplifying the integration of data in content-driven applications.
-home: https://mongodb.org
-icon: https://pbs.twimg.com/profile_images/750403034178478081/EPrK3ci2.jpg
+apiVersion: v1
+deprecated: true
+description: GitLab Omnibus all-in-one bundle
+home: https://about.gitlab.com
+icon: https://gitlab.com/gitlab-com/gitlab-artwork/raw/master/logo/logo-square.png
 keywords:
-- mongodb
-- database
-- nosql
+- git
+- ci
+- cd
+- deploy
+- issue tracker
+- code review
+- wiki
 maintainers:
-- name: helmecke
-name: mongodb
-version: 1.0.0
+- email: support@gitlab.com
+  name: GitLab Inc.
+- name: Mark Pundsack
+- name: Jason Plum
+- name: DJ Mountney
+- name: Joshua Lambert
+name: gitlab-omnibus
+sources:
+- http://docs.gitlab.com/ce/install/kubernetes/
+- https://gitlab.com/charts/charts.gitlab.io
+tillerVersion: '>=2.5.0'
+version: 0.1.37
